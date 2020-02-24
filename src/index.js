@@ -67,6 +67,7 @@ class Game extends React.Component {
   // Handles click events and mutates state
   handleClick(i) {
     // Throws away "future" history if we jump back to an older state
+    // This happens in the on click so you can browse different histories until you make a move
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -129,6 +130,9 @@ class Game extends React.Component {
   }
 }
 
+// Creates arrays with the indexes of three squares that would have to line up
+// for a winning board position and compares them against current squares array
+// returns false or the character in the winning row at the first position
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
